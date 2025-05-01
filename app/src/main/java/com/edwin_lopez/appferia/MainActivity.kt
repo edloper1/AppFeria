@@ -19,6 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.material3.CardDefaults
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.platform.LocalContext
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +40,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun MainScreen(onNavigateToSecondActivity: () -> Unit) {
     // Pantalla principal que contiene todos los elementos
+    val context = LocalContext.current
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -48,10 +54,45 @@ private fun MainScreen(onNavigateToSecondActivity: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // Lista de negocios con sus imágenes
-            BusinessItem("Negocios de la Nave 1")
-            BusinessItem("Negocios de la Nave 2")
-            BusinessItem("Negocios de la Nave 3")
-            BusinessItem("Atracciones y conciertos")
+            BusinessItem("Guayacan Nave 1"){
+                val intent = Intent(context, Activity3::class.java)
+                intent.putExtra("titulo", "Guayacan Nave 1")
+                intent.putExtra("imagenResId", R.drawable.nave_1)
+                intent.putExtra("ancho", 400)
+                intent.putExtra("alto", 250)
+                intent.putExtra("descripcion", "Sed dignissim fermentum dui in aliquam. Suspendisse a auctor sapien. " +
+                        "Nunc lobortis nec metus quis efficitur. Curabitur mollis ornare eros, ut scelerisque nulla tristique quis. " +
+                        "Phasellus tempus, ante at suscipit venenatis, nulla quam sodales risus, id vulputate tellus sem vitae ipsum. " +
+                        "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. ")
+                context.startActivity(intent)
+            }
+            BusinessItem("Macuilí Nave 2"){
+                val intent = Intent(context, Activity3::class.java)
+                intent.putExtra("titulo", "Macuilí Nave 2")
+                intent.putExtra("imagenResId", R.drawable.nave_2)
+                intent.putExtra("ancho", 400)
+                intent.putExtra("alto", 250)
+                intent.putExtra("descripcion", "Este es un restaurante ubicado en la nave 1, especializado en comida tradicional.")
+                context.startActivity(intent)
+            }
+            BusinessItem("Framboyan Nave 3"){
+                val intent = Intent(context, Activity3::class.java)
+                intent.putExtra("titulo", "Framboyan Nave 3")
+                intent.putExtra("imagenResId", R.drawable.nave_3)
+                intent.putExtra("ancho", 400)
+                intent.putExtra("alto", 250)
+                intent.putExtra("descripcion", "Este es un restaurante ubicado en la nave 1, especializado en comida tradicional.")
+                context.startActivity(intent)
+            }
+            BusinessItem("Artistas"){
+                val intent = Intent(context, Activity3::class.java)
+                intent.putExtra("titulo", "Artistas")
+                intent.putExtra("imagenResId", R.drawable.cartelera_conciertos)
+                intent.putExtra("ancho", 450)
+                intent.putExtra("alto", 350)
+                intent.putExtra("descripcion", "Este es un restaurante ubicado en la nave 1, especializado en comida tradicional.")
+                context.startActivity(intent)
+            }
 
 
             // Botón para navegar a la segunda actividad
@@ -66,7 +107,7 @@ private fun MainScreen(onNavigateToSecondActivity: () -> Unit) {
 }
 
 @Composable
-fun BusinessItem(text: String) {
+fun BusinessItem(text: String, onClick: () -> Unit) {
     // Componente reutilizable para mostrar negocio con imagen
 
     // Determina si el sistema está en modo oscuro
@@ -82,6 +123,7 @@ fun BusinessItem(text: String) {
         modifier = Modifier
             .fillMaxWidth()
             .height(120.dp)
+            .clickable { onClick() }
     ) {
         Row(
             modifier = Modifier
@@ -89,10 +131,10 @@ fun BusinessItem(text: String) {
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Imagen del restaurante
+            // Imagen de las cards
             Image(
-                painter = painterResource(id = R.drawable.logo_rest),
-                contentDescription = "Logo restaurante",
+                painter = painterResource(id = R.drawable.logo_feria_2025),
+                contentDescription = "Logo feria",
                 modifier = Modifier
                     .size(100.dp)
                     .padding(8.dp)
