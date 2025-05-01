@@ -49,6 +49,7 @@ fun SecondScreen(onBackPressed: () -> Unit) {
         }
     }
 }
+//preview de la pantalla secundaria
 @Preview(showBackground = true)
 @Composable
 fun SecondScreenPreview() {

@@ -26,7 +26,15 @@
         <activity
             android:name=".Activity2"
             android:exported="false"
-            android:theme="@style/Theme.AppFeria" />
+            android:theme="@style/Theme.AppFeria"
+            />
+        <activity
+            android:name=".Activity3"
+            android:exported="false"
+            android:theme="@style/Theme.AppFeria"
+
+            />
+
     </application>
 
 </manifest>
